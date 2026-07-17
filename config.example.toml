@@ -4,11 +4,11 @@
 # served behind an OpenAI-compatible /v1/chat/completions endpoint.
 
 [models]
-default = "mythos-2"
+default = "olympus-cyber"
 
-[model.mythos-2]
-model = "mythos-2"                       # slug sent to the server
-name = "Olympus (Mythos-2)"              # display label in the model picker
+[model.olympus-cyber]
+model = "olympus-cyber"                  # slug sent to the server
+name = "Olympus Cyber Model"             # display label in the model picker
 base_url = "http://REPLACE_WITH_MYTHOS2_HOST:8000/v1"   # your OpenAI-compatible endpoint
 env_key = "MYTHOS_API_KEY"               # reads the key from $MYTHOS_API_KEY (or use api_key = "...")
 api_backend = "chat_completions"         # Mythos-2 speaks the standard chat/completions API
