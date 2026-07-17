@@ -7,7 +7,7 @@ use std::path::PathBuf;
 /// Top-level commands for the pager binary.
 #[derive(Debug, Clone, Subcommand)]
 pub enum Command {
-    /// Run Grok without the interactive UI
+    /// Run Olympus Build without the interactive UI
     Agent(Box<AgentArgs>),
     /// Show the configuration Grok discovers for this directory
     Inspect {
@@ -19,7 +19,7 @@ pub enum Command {
     Leader(LeaderMgmtArgs),
     /// Sign out and clear cached credentials
     Logout,
-    /// Sign in to Grok
+    /// Sign in to Olympus Build
     Login {
         /// Ignored (kept for backwards compatibility). OAuth2 is now the only auth method.
         #[arg(long, hide = true)]
@@ -329,7 +329,7 @@ impl AgentArgs {
 pub enum AgentCmd {
     /// Run the agent over stdio
     Stdio,
-    /// Run the agent headlessly over the Grok WebSocket relay
+    /// Run the agent headlessly over the Olympus WebSocket relay
     Headless(HeadlessArgs),
     /// Run the agent as a WebSocket server
     Serve(ServeArgs),
@@ -736,7 +736,7 @@ pub struct PagerArgs {
     /// Run standalone even when leader mode is configured.
     #[arg(long, conflicts_with = "leader", hide = true)]
     pub no_leader: bool,
-    /// Initial prompt for the interactive session, e.g. `grok "fix the bug"` or `grok --worktree=feat "create this feature"`.
+    /// Initial prompt for the interactive session, e.g. `olympus "fix the bug"` or `olympus --worktree=feat "create this feature"`.
     #[arg(
         value_name = "PROMPT",
         conflicts_with_all = &["single",
@@ -778,8 +778,8 @@ impl PagerArgs {
             .map(std::path::Path::new)
             .and_then(|p| p.file_name())
             .and_then(|n| n.to_str())
-            .filter(|n| *n == "grok" || *n == "agent")
-            .unwrap_or("grok")
+            .filter(|n| *n == "olympus" || *n == "grok" || *n == "agent")
+            .unwrap_or("olympus")
             .to_owned();
         let mut args = Self::parse_from(std::iter::once(bin_name).chain(std::env::args().skip(1)));
         if let Some(socket) = args.leader_socket.take() {
