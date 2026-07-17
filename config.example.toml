@@ -1,0 +1,16 @@
+# Olympus Build — model configuration
+# Copy to ~/.grok/config.toml (the config path is unchanged from upstream).
+# This points Olympus Build at our own Mythos-2 model (GLM-5.2 + security LoRA)
+# served behind an OpenAI-compatible /v1/chat/completions endpoint.
+
+[models]
+default = "mythos-2"
+
+[model.mythos-2]
+model = "mythos-2"                       # slug sent to the server
+name = "Olympus (Mythos-2)"              # display label in the model picker
+base_url = "http://REPLACE_WITH_MYTHOS2_HOST:8000/v1"   # your OpenAI-compatible endpoint
+env_key = "MYTHOS_API_KEY"               # reads the key from $MYTHOS_API_KEY (or use api_key = "...")
+api_backend = "chat_completions"         # Mythos-2 speaks the standard chat/completions API
+context_window = 200000
+supported_in_api = true
